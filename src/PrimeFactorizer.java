@@ -3,7 +3,9 @@ import java.util.*;
 import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.counting;
 import static java.util.stream.Collectors.groupingBy;
-
+/**
+ * Created by thyferny on 2017/3/14.
+ */
 public class PrimeFactorizer{
 	public static List<Long> factorList(long n) {
 		List<Long> list = new ArrayList<Long>();

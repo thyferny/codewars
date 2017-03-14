@@ -7,12 +7,12 @@ import static java.util.function.UnaryOperator.identity;
 import static java.util.stream.Collectors.*;
 
 public class PrimeDecomp {
-    public List<Integer> factorList(int n) {
-        List<Integer> list = new ArrayList<Integer>();
+    public List<Long> factorList(long n) {
+        List<Long> list = new ArrayList<Long>();
         if (n <= 2) {
             list.add(n);
         } else {
-            for (int i = 2; i < n; i++) {
+            for (long i = 2; i < n; i++) {
                 while (n > 2 && n % i == 0) {
                     list.add(i);
                     n = n / i;
@@ -29,5 +29,9 @@ public class PrimeDecomp {
         return new PrimeDecomp().factorList(n).stream().collect(
                 groupingBy(identity(), TreeMap::new, counting())
         ).entrySet().stream().map(i -> "(" + i.getKey() + (i.getValue() > 1 ? "**" + i.getValue() : "") + ")").collect(joining());
+    }
+
+    public static void main(String[] args) {
+        System.out.println(factors(12345*3));
     }
 }
