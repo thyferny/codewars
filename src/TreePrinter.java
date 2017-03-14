@@ -5,16 +5,17 @@ import java.util.*;
  */
 public class TreePrinter {
 
-    private static void printTree(List<BinaryTreeNode> nodes) {
+    private static void printTree(List<TreeNode> nodes) {
         if (nodes.isEmpty())
             return;
-        List<BinaryTreeNode> newNodes = new ArrayList<BinaryTreeNode>();
-        for (BinaryTreeNode node : nodes) {
+        List<TreeNode> newNodes = new ArrayList<TreeNode>();
+        for (TreeNode node : nodes) {
             if (node != null) {
                 System.out.print(node.value);
                 System.out.print(" ");
-                newNodes.add(node.leftNode);
-                newNodes.add(node.rightNode);
+                if(node.children!=null){
+                    newNodes.addAll(node.children);
+                }
             }
         }
         System.out.println("");
@@ -22,35 +23,43 @@ public class TreePrinter {
     }
 
     public static void main(String[] args) {
-        BinaryTreeNode root = new BinaryTreeNode(0);
-        BinaryTreeNode a = new BinaryTreeNode(1);
-        BinaryTreeNode b = new BinaryTreeNode(2);
-        BinaryTreeNode aa = new BinaryTreeNode(3);
-        BinaryTreeNode bb = new BinaryTreeNode(4);
-        BinaryTreeNode bba = new BinaryTreeNode(5);
-        BinaryTreeNode bbb = new BinaryTreeNode(6);
-        BinaryTreeNode aaa = new BinaryTreeNode(7);
-        root.leftNode=a;
-        root.rightNode=b;
+        TreeNode root = new TreeNode(0);
+        TreeNode a = new TreeNode(1);
+        TreeNode b = new TreeNode(2);
+        TreeNode aa = new TreeNode(3);
+        TreeNode bb = new TreeNode(4);
+        TreeNode bba = new TreeNode(5);
+        TreeNode bbb = new TreeNode(6);
+        TreeNode aaa = new TreeNode(7);
+        root.addChild(a);
+        root.addChild(b);
 
-        a.leftNode=aa;
+        a.addChild(aa);
 //        a.rightNode=ab;
 //        b.leftNode=ba;
-        b.rightNode=bb;
-        aa.leftNode=aaa;
-        bb.leftNode = bba;
-        bb.rightNode=bbb;
+        b.addChild(bb);
+        aa.addChild(aaa);
+        bb.addChild(bba);
+        bb.addChild(bbb);
 
         printTree(Collections.singletonList(root));
     }
 }
 
-class BinaryTreeNode{
-    BinaryTreeNode leftNode=null;
-    BinaryTreeNode rightNode=null;
+class TreeNode {
+    List<TreeNode> children=null;
     int value;
 
-    public BinaryTreeNode(int value) {
+    public TreeNode(int value) {
         this.value = value;
+    }
+
+    public void addChild(TreeNode child) {
+        if(child!=null){
+            if(children==null){
+                children = new ArrayList<>();
+            }
+            children.add(child);
+        }
     }
 }
